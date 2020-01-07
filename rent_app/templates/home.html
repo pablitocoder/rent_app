@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="dropdown drop-btn">
+      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sortuj wyniki
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Najpopularniejsze</a>
+        <a class="dropdown-item" href="#">Najczęściej oceniane</a>
+        <a class="dropdown-item" href="#">Alfabetycznie</a>
+      </div>
+        <div></div>
+    </div>
+    {% for car in cars %}
+        <article class="media content-section">
+            <div>
+                <a href = "{{ (url_for('car_profile', car_id=car.id))}}">
+            <img class="align-self-start mr-3 img-fluid article-img rounded" src="../static/photos/{{car.image_file}}" alt="Generic placeholder image">
+                    </a>
+            </div>
+          <div class="media-body">
+            <h2><a class="article-title" href="{{ (url_for('car_profile', car_id=car.id))}}">{{ car.brand + " " + car.model }}</a></h2>
+            <p class="article-content"> kategoria: <i>{{ car.category }} </i></p>
+              <p class="article-content"> liczba ocen: <i> {{ car.prod_year }} </i></p>
+              <p class="article-content"> cena: <i> {{ car.price }} zł/doba </i></p>
+              <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
+              <button class="btn btn-info">Wypożycz</button>
+          </div>
+            <div>
+
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

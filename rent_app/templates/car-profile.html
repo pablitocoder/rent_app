@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+            <div class="media content-section">
+          <div class="media-body">
+              <img class="align-self-start img-fluid rounded" src="../static/photos/{{ car.image_file }}" alt="Generic placeholder image">
+              <div align="center" class="car-name">
+                  <li class="list-group-item">
+              <h2><a class="article-title" href="#">{{ car.brand.capitalize() + " " + car.model.capitalize() }}</a></h2>
+              </li>
+              </div>
+              <div style="float: left; width: 50%;">
+              <ul class="list-group">
+                  <li class="list-group-item"> kategoria: <i>{{ car.category }}</i></li>
+                  <li class="list-group-item"> rok produkcji: <i>{{ car.prod_year }} </i></li>
+                  <li class="list-group-item"> typ: <i> {{ car.type }}  </i></li>
+                  <li class="list-group-item"> dostępność: <i> Tak  </i></li>
+              </ul>
+              </div>
+                  <div style="float: right; width: 50%;">
+                      <ul class="list-group">
+                  <li class="list-group-item"> skrzynia biegów: <i> {{ car.gearcase }}  </i></li>
+                  <li class="list-group-item"> miejsca: <i> {{ car.seats }}  </i></li>
+                  <li class="list-group-item"> rodzaj: <i> {{ car.fuel }}  </i></li>
+                          <li class="list-group-item"> cena: <b> {{ car.price }} zł/doba </b></li>
+              </ul>
+                  </div>
+                    <div align="right" >
+                        <button class="btn btn-info car-btn">Wypożycz</button>
+          </div>
+              </div>
+            </div>
+
+    <h4>Opinie</h4>
+<div class="media content-section">
+    <div class="media-body">
+        <div class="meta-data">
+            <small>Data opinii</small>
+        </div>
+        <h5><p class="article-title">Uzytkownik</p></h5>
+        <p class="article-content">Zajebiste auto</p>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
