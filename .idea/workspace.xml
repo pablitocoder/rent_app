@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68edc0a8-2b2f-4826-b82f-89889f12c9a4" name="Default Changelist" comment="" />
+    <list default="true" id="68edc0a8-2b2f-4826-b82f-89889f12c9a4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rent_app/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/templates/car-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/car-profile.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,12 +22,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1W1L2IlPoiMKuYPiojOGTbY2IiD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -23,6 +39,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -32,6 +49,27 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.run (1)">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="flask_app" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/rent_app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rent_app/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="flask_app" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -121,10 +159,12 @@
       <item itemvalue="Python.run" />
       <item itemvalue="Python.db_manage" />
       <item itemvalue="Python.run (1)" />
+      <item itemvalue="Python.__init__" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.run (1)" />
+        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.db_manage" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.app" />
@@ -170,35 +210,35 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="109" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578311988106" />
-    <state width="1659" height="208" key="GridCell.Tab.0.bottom" timestamp="1578421254542">
+    <state width="1659" height="208" key="GridCell.Tab.0.bottom" timestamp="1578429286035">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421254542" />
+    <state width="1659" height="208" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
     <state width="1345" height="135" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.center" timestamp="1578421254542">
+    <state width="1659" height="208" key="GridCell.Tab.0.center" timestamp="1578429286035">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421254542" />
+    <state width="1659" height="208" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
     <state width="1345" height="135" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.left" timestamp="1578421254542">
+    <state width="1659" height="208" key="GridCell.Tab.0.left" timestamp="1578429286035">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421254542" />
+    <state width="1659" height="208" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
     <state width="1345" height="135" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.right" timestamp="1578421254542">
+    <state width="1659" height="208" key="GridCell.Tab.0.right" timestamp="1578429286035">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421254542" />
+    <state width="1659" height="208" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
     <state width="1345" height="135" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
     <state x="1764" y="106" key="SettingsEditor" timestamp="1578421249058">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
     <state x="1764" y="106" key="SettingsEditor/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421249058" />
     <state x="186" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578312119450" />
-    <state x="1831" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1578421272781">
+    <state x="1831" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1578423793806">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state x="1831" y="262" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421272781" />
+    <state x="1831" y="262" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578423793806" />
     <state x="378" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578420047472" />
   </component>
 </project>
