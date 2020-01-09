@@ -45,8 +45,10 @@ a.article-title:hover {
 }
 
 .article-content {
-  white-space: pre-line;
+  line-height:0.9;
+
 }
+
 
 .article-img {
     width:350px;
@@ -101,7 +103,7 @@ border:1px;
 }
 
 .car-btn {
-margin-top:10px
+margin-top:8px
 }
 
 .drop-btn{

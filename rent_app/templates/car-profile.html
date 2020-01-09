@@ -1,48 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
-            <div class="media content-section">
-          <div class="media-body">
-              <img class="align-self-start img-fluid rounded" src="../static/photos/{{ car.image_file }}" alt="Generic placeholder image">
-              <div align="center" class="car-name">
-                  <li class="list-group-item">
-              <h2><a class="article-title" href="#">{{ car.brand + " " + car.model }}</a></h2>
-              </li>
-              </div>
-              <div style="float: left; width: 50%;">
-              <ul class="list-group">
-                  <li class="list-group-item"> kategoria: <i>{{ car.category }}</i></li>
-                  <li class="list-group-item"> rok produkcji: <i>{{ car.prod_year }} </i></li>
-                  <li class="list-group-item"> typ: <i> {{ car.type }}  </i></li>
-                  <li class="list-group-item"> dostępność: <i> Tak  </i></li>
-              </ul>
-              </div>
-                  <div style="float: right; width: 50%;">
-                      <ul class="list-group">
-                  <li class="list-group-item"> skrzynia biegów: <i> {{ car.gearcase }}  </i></li>
-                  <li class="list-group-item"> miejsca: <i> {{ car.seats }}  </i></li>
-                  <li class="list-group-item"> rodzaj: <i> {{ car.fuel }}  </i></li>
-                          <li class="list-group-item"> cena: <b> {{ car.price }} zł/doba </b></li>
-              </ul>
-                  </div>
-                    <div align="right" >
-                        <button class="btn btn-info car-btn">Wypożycz</button>
-          </div>
-              </div>
+<div class="media">
+<div class="">
+  <img class="align-self-start img-fluid rounded" src="../static/photos/{{ car.image_file }}" alt="Generic placeholder image">
+
+  <legend class="border-bottom" style="margin-top:15px;">Informacje o samochodzie</legend>
+    <div align="center" class="car-name">
+        <h2><a class="article-title" href="#">{{ car.brand + " " + car.model }}</a></h2>
+  </div>
+  <div style="float: left; width: 50%;">
+      <ul class="list-group">
+          <li class="list-group-item"> kategoria: <i>{{ car.category }}</i></li>
+          <li class="list-group-item"> rok produkcji: <i>{{ car.prod_year }} </i></li>
+          <li class="list-group-item"> typ: <i> {{ car.type }}  </i></li>
+          <li class="list-group-item"> dostępność: <i> Tak  </i></li>
+      </ul>
+  </div>
+  <div style="float: right; width: 50%;" >
+      <ul class="list-group">
+          <li class="list-group-item"> skrzynia biegów: <i> {{ car.gearcase }}  </i></li>
+          <li class="list-group-item"> miejsca: <i> {{ car.seats }}  </i></li>
+          <li class="list-group-item"> rodzaj: <i> {{ car.fuel }}  </i></li>
+          <li class="list-group-item"> cena: <b> {{ car.price }} zł/doba </b></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div style="margin-top:15px;">
+    <form method="POST" action="">
+                {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom">Wypożyczanie</legend>
+            <div class="form-group">
+            <div style="float: left; width: 50%;">
+            {{ form.start_date.label(class="form-control-label") }}
+            {{ form.start_date(class="form-control form-control-lg") }}
+            </div>
+            <div style="float: right; width: 50%;">
+            {{ form.end_date.label(class="form-control-label") }}
+            {{ form.end_date(class="form-control form-control-lg") }}
             </div>
 
-    <h4>Opinie</h4>
+        </fieldset>
+        <div class="form-group" style="float:center">
+            {{form.submit(class="btn btn-info") }}
+        </div>
+    </form>
+</div>
+
+<div>
+<legend class="border-bottom">Opinie</legend>
 <div class="media content-section">
     <div class="media-body">
         <div class="meta-data">
             <small>Data opinii</small>
         </div>
-        <h5><p class="article-title">Uzytkownik</p></h5>
+        <h6><p class="article-title">Uzytkownik</p></h6>
         <p class="article-content">Zajebiste auto</p>
-
     </div>
-
 </div>
-
-
-
+</div>
 {% endblock content %}

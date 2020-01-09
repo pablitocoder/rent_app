@@ -2,43 +2,39 @@
 
 {% block content %}
 <div class="content-section">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Informacje o Koncie</legend>
-            <div class="form-group">
-                {{ form.username.label(class="form-control-label") }}
-                {% if form.username.errors %}
-                    {{ form.username(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.username.errors %}
-                            <span> {{ error }} </span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.username(class="form-control form-control-lg") }}
-                {% endif %}
-
-            </div>
-            <div class = "form-group">
-                {{ form.email.label(class="form-control-label") }}
-                {% if form.email.errors %}
-                    {{ form.email(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors %}
-                            <span> {{ error }} </span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.email(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-        </fieldset>
-        <div class="form-group">
-            {{form.submit(class="btn btn-outline-info") }}
-        </div>
-    </form>
-
+    <legend class="border-bottom mb-4">Konto: <i> {{current_user.username + " | " + current_user.email}}</i>  </legend>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <a href="{{url_for('account', option='history')}}" class="btn btn-outline-info" role="button" style="margin-right:10px;">Historia Zamówień</a>
+            <a href="{{url_for('account', option='change_passwd')}}" class="btn btn-outline-info" role="button" style="margin-right:10px;">Zmień Hasło</a>
+        </form>
+    </nav>
 </div>
+    {% block account %}
+        {% for order, car in orders_cars %}
+<legend class="border-bottom">Historia zamówień</legend>
+<div class="media content-section">
+        <div>
+            <a href = "{{ (url_for('car_profile', car_id=car.id))}}">
+            <img class="align-self-start mr-3 img-fluid article-img rounded" src="../static/photos/{{car.image_file}}" alt="Generic placeholder image">
+            </a>
+        </div>
+        <div class="media-body">
+            <h2><a class="article-title" href="{{ (url_for('car_profile', car_id=car.id))}}">{{ car.brand + " " + car.model }}</a></h2>
+            <p class="article-content"> status: <i> {{ order.status }}</i></p>
+            <p class="article-content"> data wypożyczenia: <i>{{ order.order_date }} </i></p>
+              <p class="article-content"> terminy: <i> {{ order.start_date }} - {{order.end_date}} </i></p>
+            <p class="article-content"> koszt: <i> {{ car.price * (order.end_date - order.start_date) }} zł </i></p>
+              <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
+            <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Dodaj opinię</a>
+            {% if order.status=="Nierozliczone" %}
+                <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Zapłać</a>
+            {% endif %}
+        </div>
+</div>
+        {% endfor %}
 
-{% endblock %}
+
+    {% endblock account %}
+
+{% endblock content%}

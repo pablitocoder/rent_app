@@ -21,6 +21,7 @@ Car(category='klasyki', image_file='wolga.jpg',brand='Wołga', model='GAZ 21', t
 Car(category='klasyki', image_file='bentley.jpg',brand='Bentley', model=' ', type='sedan', price = 320, prod_year=1950, seats=5, fuel='benzyna', gearcase='manualna'),
 Car(category='klasyki', image_file='golf.jpg',brand='Volkswagen', model='Golf 1', type='hatchback', price = 290, prod_year=1979, seats=5, fuel='benzyna', gearcase='manualna')
 ]
+
 for car in ls:
     db.session.add(car)
 db.session.commit()

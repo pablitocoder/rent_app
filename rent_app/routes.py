@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from rent_app import app, db, bcrypt
-from rent_app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from rent_app.forms import RegistrationForm, LoginForm, ChangePassword, RentForm
 from rent_app.models import Car, User, Order
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -42,10 +42,17 @@ def login():
     return render_template('login.html',title = 'Login', form = form)
 
 
-@app.route('/car_profile/<int:car_id>')
+@app.route('/car_profile/<int:car_id>', methods=["POST", "GET"])
 def car_profile(car_id):
-    car = Car.query.filter_by(id=int(car_id)).first()
-    return render_template('car-profile.html', car=car)
+    form = RentForm()
+    if form.validate_on_submit():
+        order = Order(car_id = car_id, user_id = current_user.id, start_date = form.start_date.data, end_date=form.end_date.data)
+        db.session.add(order)
+        db.session.commit()
+        return redirect(url_for('account'))
+    else:
+        car = Car.query.filter_by(id=int(car_id)).first()
+        return render_template('car-profile.html', car=car, form=form)
 
 @app.route('/filter/<cat>')
 def filter(cat):
@@ -60,17 +67,21 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/account', methods=["POST", "GET"])
+@app.route('/account/<option>', methods=["POST", "GET"])
 @login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        db.session.commit()
-        flash('you account has been updated','success')
-        return redirect(url_for('account'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    return render_template('account.html', form=form)
+def account(option):
+    form = ChangePassword()
+    if option=="change_passwd":
+        if form.validate_on_submit():
+            current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            db.session.commit()
+            flash('hasło zostało zmienione!', 'success')
+            return redirect(url_for('account', option='history'))
+        else:
+            return render_template('change_passwd.html', form=form)
+    else:
+        orders = Order.query.filter_by(user_id=current_user.id)
+        cars_id = [order.car_id for order in orders]
+        cars = [Car.query.filter_by(id=car_id).first() for car_id in cars_id]
+        orders_cars = zip(orders,cars)
+        return render_template('account.html',orders_cars=orders_cars )

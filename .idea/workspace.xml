@@ -2,17 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68edc0a8-2b2f-4826-b82f-89889f12c9a4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rent_app/templates/account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rent_app/templates/change_passwd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rent_app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/backups/codestyle.ini.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/backups/encoding.ini.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/backups/vcs.ini.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/backups/workspace.ini.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/codestyle.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-codestyle-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-encoding-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-vcs-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-workspace-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/encoding.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/vcs.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/workspace.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/db_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/db_manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/site.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rent_app/templates/car-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/car-profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rent_app/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/rent_app/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +55,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -164,8 +178,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.run (1)" />
-        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.db_manage" />
+        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.app" />
       </list>
@@ -194,6 +208,14 @@
       <option name="presentableId" value="Default" />
       <updated>1578100054768</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update">
+      <created>1578434513214</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578434513214</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -205,40 +227,48 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="1851" y="100" key="CommitChangelistDialog2" timestamp="1578434511682">
+      <screen x="1366" y="0" width="1680" height="1010" />
+    </state>
+    <state x="1851" y="100" key="CommitChangelistDialog2/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578434511682" />
     <state x="463" y="109" key="FileChooserDialogImpl" timestamp="1578311988106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="109" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578311988106" />
-    <state width="1659" height="208" key="GridCell.Tab.0.bottom" timestamp="1578429286035">
+    <state width="1659" height="134" key="GridCell.Tab.0.bottom" timestamp="1578533787456">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
-    <state width="1345" height="135" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.center" timestamp="1578429286035">
+    <state width="1659" height="134" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578533787456" />
+    <state width="1345" height="134" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578509392767" />
+    <state width="1659" height="134" key="GridCell.Tab.0.center" timestamp="1578533787456">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
-    <state width="1345" height="135" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.left" timestamp="1578429286035">
+    <state width="1659" height="134" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578533787456" />
+    <state width="1345" height="134" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578509392767" />
+    <state width="1659" height="134" key="GridCell.Tab.0.left" timestamp="1578533787456">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
-    <state width="1345" height="135" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state width="1659" height="208" key="GridCell.Tab.0.right" timestamp="1578429286035">
+    <state width="1659" height="134" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578533787456" />
+    <state width="1345" height="134" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578509392767" />
+    <state width="1659" height="134" key="GridCell.Tab.0.right" timestamp="1578533787456">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state width="1659" height="208" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578429286035" />
-    <state width="1345" height="135" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578351099990" />
-    <state x="1764" y="106" key="SettingsEditor" timestamp="1578421249058">
+    <state width="1659" height="134" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578533787456" />
+    <state width="1345" height="134" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578509392767" />
+    <state x="1764" y="106" key="SettingsEditor" timestamp="1578523238290">
       <screen x="1366" y="0" width="1680" height="1010" />
     </state>
-    <state x="1764" y="106" key="SettingsEditor/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578421249058" />
-    <state x="186" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578312119450" />
-    <state x="1831" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1578423793806">
-      <screen x="1366" y="0" width="1680" height="1010" />
+    <state x="1764" y="106" key="SettingsEditor/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578523238290" />
+    <state x="186" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578501887956" />
+    <state x="378" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1578477162048">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="1831" y="262" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1578423793806" />
-    <state x="378" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578420047472" />
+    <state x="378" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578477162048" />
   </component>
 </project>

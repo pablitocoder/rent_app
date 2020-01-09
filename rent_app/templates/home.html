@@ -23,6 +23,7 @@
             <h2><a class="article-title" href="{{ (url_for('car_profile', car_id=car.id))}}">{{ car.brand + " " + car.model }}</a></h2>
             <p class="article-content"> kategoria: <i>{{ car.category }} </i></p>
               <p class="article-content"> liczba ocen: <i> {{ car.prod_year }} </i></p>
+            <p class="article-content"> rodzaj paliwa: <i> {{ car.fuel }} </i></p>
               <p class="article-content"> cena: <i> {{ car.price }} zł/doba </i></p>
               <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
               <button class="btn btn-info">Wypożycz</button>
