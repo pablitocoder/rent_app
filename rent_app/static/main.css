@@ -45,14 +45,13 @@ a.article-title:hover {
 }
 
 .article-content {
-  line-height:0.9;
+  line-height:1.2;
 
 }
 
-
 .article-img {
-    width:350px;
-    height:205px;
+    width:305px;
+    height:180px;
   margin-right: 30px;
 }
 
@@ -112,4 +111,9 @@ margin-bottom: 10px;
 
 img {
 text-align: center;
+}
+
+.car-profile-img{
+height:300px;
+width:450px;
 }

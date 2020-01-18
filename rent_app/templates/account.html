@@ -7,34 +7,53 @@
         <form class="form-inline">
             <a href="{{url_for('account', option='history')}}" class="btn btn-outline-info" role="button" style="margin-right:10px;">Historia Zamówień</a>
             <a href="{{url_for('account', option='change_passwd')}}" class="btn btn-outline-info" role="button" style="margin-right:10px;">Zmień Hasło</a>
+            <a href="{{url_for('basket')}}" class="btn btn-outline-info" role="button" style="margin-right:10px;">Twój Koszyk</a>
         </form>
     </nav>
 </div>
+
     {% block account %}
+    <legend class="border-bottom">Historia zamówień</legend>
         {% for order, car in orders_cars %}
-<legend class="border-bottom">Historia zamówień</legend>
 <div class="media content-section">
+
         <div>
             <a href = "{{ (url_for('car_profile', car_id=car.id))}}">
-            <img class="align-self-start mr-3 img-fluid article-img rounded" src="../static/photos/{{car.image_file}}" alt="Generic placeholder image">
+                <img class="align-self-start mr-3 img-fluid article-img rounded" src="../static/photos/{{car.image_file}}" alt="Generic placeholder image">
             </a>
+
         </div>
-        <div class="media-body">
+        <div class="media-body text-center">
+
             <h2><a class="article-title" href="{{ (url_for('car_profile', car_id=car.id))}}">{{ car.brand + " " + car.model }}</a></h2>
-            <p class="article-content"> status: <i> {{ order.status }}</i></p>
-            <p class="article-content"> data wypożyczenia: <i>{{ order.order_date }} </i></p>
-              <p class="article-content"> terminy: <i> {{ order.start_date }} - {{order.end_date}} </i></p>
-            <p class="article-content"> koszt: <i> {{ car.price * (order.end_date - order.start_date) }} zł </i></p>
+
+            <p class="article-content">status: <i> {{ order.status }}</i><br>
+                data wypożyczenia: <i>{{ order.order_date }} </i><br>
+                terminy: <i> {{ order.start_date }} - {{order.end_date}}</i><br>
+                koszt: <i> {{ car.price * (order.end_date - order.start_date) }} zł</i><br>
+            </p>
               <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
-            <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Dodaj opinię</a>
             {% if order.status=="Nierozliczone" %}
                 <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Zapłać</a>
             {% endif %}
         </div>
+
 </div>
+<div style="margin-bottom:5px">
+                <form class="form-group" method="POST" action="{{ url_for('account', option='add_opinion') }}">
+                    <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                    {% if order.opinion %}
+                    <textarea class="form-control" rows="2" name="opinion_text">{{order.opinion}}</textarea>
+                    <input type="submit" class="btn btn-outline-info" style="margin-top: 3px;"  value="Edytuj opinię" >
+                    {% else %}
+                    <textarea class="form-control" rows="2" name="opinion_text" placeholder="Dodaj opinię"></textarea>
+                    <input type="submit" class="btn btn-outline-info" style="margin-top: 3px;" value="Dodaj opinię">
+
+                    {% endif %}
+                </form>
+            </div>
+            <hr>
         {% endfor %}
-
-
     {% endblock account %}
-
 {% endblock content%}
+

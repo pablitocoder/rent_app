@@ -18,17 +18,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('home') }} ">Lista samochodów</a>
-              <a class="nav-item nav-link" href="{{ url_for('about') }} ">Koszyk</a>
+              <a class="nav-item nav-link" href="{{ url_for('home') }} ">lista samochodów</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ url_for('basket') }} ">koszyk</a>
                     <a class="nav-item nav-link" href="{{ url_for('account', option='history') }}">konto ({{ current_user.username }}) </a>
-                    <a class="nav-item nav-link" href="{{ url_for('logout') }} ">Wyloguj</a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }} ">wyloguj</a>
                 {% else %}
-                  <a class="nav-item nav-link" href="{{ url_for('login') }} ">Logowanie</a>
-                  <a class="nav-item nav-link" href="{{ url_for('register') }} ">Rejestracja</a>
+                  <a class="nav-item nav-link" href="{{ url_for('login') }} ">logowanie</a>
+                  <a class="nav-item nav-link" href="{{ url_for('register') }} ">rejestracja</a>
                 {% endif %}
             </div>
           </div>
@@ -52,10 +52,10 @@
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <h3>Kategorie</h3>
-            <p class='text-muted'>Filtruj wyniki według kategori:
+            <h3>Nasze igiełki</h3>
+            <p class='text-muted'>Kategorie:
               <div class="list-group">
-                <a href="{{ (url_for('home')) }}" class="list-group-item list-group-item-action list-group-item-info">Wszystkie</a>
+                <a href="{{ (url_for('filter', cat='wszystkie')) }}" class="list-group-item list-group-item-action list-group-item-info">Wszystkie</a>
                 <a href="{{ (url_for('filter', cat='osobowe')) }}" class="list-group-item list-group-item-action list-group-item-info">Osobowe</a>
                 <a href="{{ (url_for('filter', cat='dostawcze')) }}" class="list-group-item list-group-item-action list-group-item-info">Dostawcze</a>
                 <a href="{{ (url_for('filter', cat='sportowe')) }}" class="list-group-item list-group-item-action list-group-item-info">Sportowe</a>
@@ -63,6 +63,7 @@
                 <a href="{{ (url_for('filter', cat='klasyki')) }}" class="list-group-item list-group-item-action list-group-item-info">Klasyki</a>
               </div>
             </p>
+          {% block content1 %} {% endblock content1 %}
           </div>
         </div>
       </div>

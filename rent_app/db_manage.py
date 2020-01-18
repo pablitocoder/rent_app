@@ -1,6 +1,6 @@
 from rent_app import db
-from rent_app.models import User, Car, Order
-
+from rent_app.models import User, Car, Order, Basket
+"""
 db.drop_all()
 db.create_all()
 
@@ -25,3 +25,4 @@ Car(category='klasyki', image_file='golf.jpg',brand='Volkswagen', model='Golf 1'
 for car in ls:
     db.session.add(car)
 db.session.commit()
+"""

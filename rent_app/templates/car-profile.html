@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="media">
+<div class="overflow" style="overflow:scroll;height:90vh">
+<div class="col-md-12" >
 <div class="">
-  <img class="align-self-start img-fluid rounded" src="../static/photos/{{ car.image_file }}" alt="Generic placeholder image">
+  <img class="align-self-start rounded img-fluid" src="../static/photos/{{ car.image_file }}" alt="Tu ma byc zdj">
 
   <legend class="border-bottom" style="margin-top:15px;">Informacje o samochodzie</legend>
     <div align="center" class="car-name">
@@ -25,40 +26,21 @@
     </ul>
   </div>
 </div>
-</div>
 
-<div style="margin-top:15px;">
-    <form method="POST" action="">
-                {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom">Wypożyczanie</legend>
-            <div class="form-group">
-            <div style="float: left; width: 50%;">
-            {{ form.start_date.label(class="form-control-label") }}
-            {{ form.start_date(class="form-control form-control-lg") }}
-            </div>
-            <div style="float: right; width: 50%;">
-            {{ form.end_date.label(class="form-control-label") }}
-            {{ form.end_date(class="form-control form-control-lg") }}
-            </div>
-
-        </fieldset>
-        <div class="form-group" style="float:center">
-            {{form.submit(class="btn btn-info") }}
-        </div>
-    </form>
-</div>
-
-<div>
+<div style="margin-top:20px;">
 <legend class="border-bottom">Opinie</legend>
+{% for order, user in orders_users %}
 <div class="media content-section">
     <div class="media-body">
         <div class="meta-data">
-            <small>Data opinii</small>
+            <small>{{order.opinion_date.strftime("%d-%m-%Y %H:%M:%S")}}</small>
         </div>
-        <h6><p class="article-title">Uzytkownik</p></h6>
-        <p class="article-content">Zajebiste auto</p>
+        <h6><p class="article-title">{{ user.username }}</p></h6>
+        <p class="article-content">{{ order.opinion }}</p>
     </div>
+</div>
+{% endfor %}
+</div>
 </div>
 </div>
 {% endblock content %}
