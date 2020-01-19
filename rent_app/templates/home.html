@@ -18,7 +18,7 @@
                 cena: <i> {{ car.price }} zł/doba </i><br>
             </p>
                 <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
-              <button class="btn btn-info">Do koszyka</button>
+              <a href= "{{ (url_for('basket',option='add', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Do koszyka</a>
           </div>
             <div>
 

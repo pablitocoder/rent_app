@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="overflow" style="overflow:scroll;height:90vh">
-<div class="col-md-12" >
+<div class="col-md-12">
 <div class="">
   <img class="align-self-start rounded img-fluid" src="../static/photos/{{ car.image_file }}" alt="Tu ma byc zdj">
-
   <legend class="border-bottom" style="margin-top:15px;">Informacje o samochodzie</legend>
-    <div align="center" class="car-name">
+    <div style="text-align:center;" class="car-name" >
         <h2><a class="article-title" href="#">{{ car.brand + " " + car.model }}</a></h2>
-  </div>
+    </div>
   <div style="float: left; width: 50%;">
       <ul class="list-group">
           <li class="list-group-item"> kategoria: <i>{{ car.category }}</i></li>
           <li class="list-group-item"> rok produkcji: <i>{{ car.prod_year }} </i></li>
           <li class="list-group-item"> typ: <i> {{ car.type }}  </i></li>
-          <li class="list-group-item"> dostępność: <i> Tak  </i></li>
+          {% if car_aval=="TAK" %}
+          <li class="list-group-item" style="color:green;"> dostępność: <i> {{ car_aval }}  </i></li>
+          {% else %}
+          <li class="list-group-item" style="color:red;"> dostępność: <i> {{ car_aval }}  </i></li>
+          {% endif %}
       </ul>
   </div>
   <div style="float: right; width: 50%;" >
@@ -27,10 +30,39 @@
   </div>
 </div>
 
-<div style="margin-top:20px;">
+<div align="right">
+    <a href= "#collapse_form" data-toggle="collapse" class="btn btn-outline-info" role = "button" aria-expanded="false" aria-controls="collapse_form" >Wypożycz</a>
+    <a href= "{{ (url_for('basket',option='add', car_id=car.id))}}" class="btn btn-outline-info" role = "button" >Dodaj do koszyka</a>
+</div>
+
+
+<div class="collapse" id="collapse_form">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{form.car_id(type="hidden", value=car.id)}}
+                <div style="float: left; width: 50%;">
+                <label class="form-control-label">Wypożycz od:</label>
+                    {{ form.start_date(class="form-control", type="date") }}
+                </div>
+                <div style="float: right; width: 50%;">
+                <label class="form-control-label">do:</label>
+                    {{ form.end_date(class="form-control", type="date") }}
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group" align="right">
+            {{ form.submit(class="btn btn-info") }}
+        </div>
+    </form>
+</div>
+
+<div class= "" style="margin-top:10pt;">
 <legend class="border-bottom">Opinie</legend>
 {% for order, user in orders_users %}
 <div class="media content-section">
+{% if order.opinion %}
     <div class="media-body">
         <div class="meta-data">
             <small>{{order.opinion_date.strftime("%d-%m-%Y %H:%M:%S")}}</small>
@@ -38,6 +70,7 @@
         <h6><p class="article-title">{{ user.username }}</p></h6>
         <p class="article-content">{{ order.opinion }}</p>
     </div>
+{% endif %}
 </div>
 {% endfor %}
 </div>

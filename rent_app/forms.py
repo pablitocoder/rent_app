@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField
+from flask import flash
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from rent_app.models import User
 from flask_login import current_user
+import datetime
 
 
 class RegistrationForm(FlaskForm):
@@ -49,8 +51,25 @@ class ChangePassword(FlaskForm):
 
 
 class RentForm(FlaskForm):
+    car_id = IntegerField("")
     start_date = DateField('Data wypożyczenia: ', validators=[DataRequired()])
     end_date = DateField('Data zwrotu: ', validators=[DataRequired()])
-    submit = SubmitField('Wypożycz')
+    submit = SubmitField('Zatwierdź')
+
+    def validate_start_date(self,start_date):
+        diff = datetime.datetime.utcnow().date() - start_date
+        if diff.days < 0:
+            flash("Wybierz poprawne daty", 'danger')
+            raise ValidationError("Wybierz poprawne daty")
+
+    def validate_end_date(self, end_date):
+        diff = end_date.data - self.start_date.data
+        if diff.days <= 0 :
+            flash("Data zakończenia musi być późniejsza od daty rozpoczęcia.", 'danger')
+            raise ValidationError("Data zakończenia musi być późniejsza od daty rozpoczęcia.")
+
+
+
+
 
 

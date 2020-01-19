@@ -25,4 +25,12 @@ Car(category='klasyki', image_file='golf.jpg',brand='Volkswagen', model='Golf 1'
 for car in ls:
     db.session.add(car)
 db.session.commit()
+
+db.create_all()
+bas = Basket(user_id=1, car_id=2)
+db.session.add(bas)
+db.session.commit()
 """
+db.session.query(Order).delete()
+db.session.commit()
+

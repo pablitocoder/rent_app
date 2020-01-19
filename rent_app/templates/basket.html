@@ -1,7 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="overflow:scroll;height:90vh;">
+{% for car, op_num in cars_ops %}
+<div class="media content-section">
+    <div>
+        <a href = "{{ (url_for('car_profile', car_id=car.id))}}">
+            <img class="align-self-start mr-3 img-fluid article-img rounded" src="/static/photos/{{car.image_file}}" alt="Generic placeholder image">
+        </a>
+    </div>
+    <div class="media-body text-center">
+        <h2><a class="article-title" href="{{ (url_for('car_profile', car_id=car.id))}}">{{ car.brand + " " + car.model }}</a></h2>
+        <p class="article-content">
+            kategoria: <i>{{ car.category }} </i><br>
+            liczba ocen: <i> {{ op_num }} </i><br>
+            rok produkcji: <i> {{ car.prod_year }} </i><br>
+            cena: <i> {{ car.price }} zł/doba </i><br>
+        </p>
+    <a href= "{{ (url_for('basket',option='remove', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Usuń z koszyka</a>
+    </div>
+</div>
+<div style="margin-top:15px;">
+    <form method="POST" action="{{url_for('car_profile', car_id=car.id)}}">
+        <fieldset class="form-group">
+            <div class="form-group">
+            <div style="float: left; width: 50%;">
+            <label class="form-control-label">Wypożycz od:</label>
+                {{ form.start_date(class="form-control", type="date") }}
+            <!--<input name="start_date" type="date" class="form-control" > -->
+            </div>
+            <div style="float: right; width: 50%;">
+            <label class="form-control-label">do:</label>
+            {{ form.end_date(class="form-control", type="date") }}
+            </div>
+        </fieldset>
+        <div class="form-group" align="right">
+            {{ form.submit(class="btn btn-info") }}
+        </div>
+    </form>
+</div>
+<hr>
+{% endfor %}
+</div>
 
+<!--
 <div style="margin-top:15px;">
     <form method="POST" action="{{url_for('car_profile', car_id=1)}}">
         <fieldset class="form-group">
@@ -23,5 +65,5 @@
         </div>
     </form>
 </div>
-
+-->
 {% endblock content %}

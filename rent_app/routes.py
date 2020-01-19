@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from rent_app import app, db, bcrypt
 from rent_app.forms import RegistrationForm, LoginForm, ChangePassword, RentForm
-from rent_app.models import Car, User, Order
+from rent_app.models import Car, User, Order, Basket
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
 
@@ -9,9 +9,33 @@ import datetime
 def home():
     return redirect(url_for('filter',cat= 'wszystkie'))
 
+def stat_counter(car,to_count='opinions'):
+    all_orders = Order.query.all()
+    if to_count=='opinions':
+        counts = [1 if order.car_id==car.id else 0 for order in all_orders].count(1)
+    else:
+        counts = len([val for val in [order.opinion if order.car_id == car.id else None for order in all_orders] if val])
+    return counts
+
 def print_date(dtime):
     return dtime.strftime("%d-%m-%Y %H:%M:%S")
 
+def check_dates(val,start,end):
+    if start == None or end == None:
+        return True
+    elif val.date() > end or val.date() < start:
+        return True
+    else:
+        return False
+
+def available(car_id, now=False, start_date=0, end_date=0):
+    if now:
+        orders = Order.query.filter_by(car_id = car_id)
+        now_time = datetime.datetime.utcnow()
+        avals = [check_dates(now_time, order.start_date, order.end_date) for order in orders]
+        return 'TAK' if all(avals) else 'NIE'
+    else:
+        return False
 
 @app.route('/about')
 def about():
@@ -47,11 +71,15 @@ def login():
 
 
 @app.route('/car_profile/<int:car_id>', methods=["POST", "GET"])
-def car_profile(car_id):
-    if request.method=="POST":
-        order = Order(car_id = car_id, user_id = current_user.id, start_date = request.args.get('start_date'), end_date=request.args.get('end_date'))
+@app.route('/car_profile', methods=["POST", "GET"])
+def car_profile(car_id=0):
+    form = RentForm()
+    if form.validate_on_submit():
+        car_id = form.car_id.data
+        order = Order(car_id = car_id, user_id = current_user.id, start_date = form.start_date.data, end_date=form.end_date.data)
         db.session.add(order)
         db.session.commit()
+        flash("pomyślnie wypożyczono auto",'success')
         return redirect(url_for('account', option='history'))
     else:
         car = Car.query.filter_by(id=int(car_id)).first()
@@ -59,7 +87,8 @@ def car_profile(car_id):
         users_id = [order.user_id for order in orders]
         users = [User.query.filter_by(id=u_id).first() for u_id in users_id]
         orders_users = zip(orders,users)
-        return render_template('car-profile.html', car=car, orders_users=orders_users )
+        car_aval = available(car.id, now=True)
+        return render_template('car-profile.html', car=car, car_aval = car_aval, orders_users=orders_users, form=form )
 
 @app.route('/filter/<cat>/')
 @app.route('/filter/<cat>/<sort>')
@@ -68,15 +97,6 @@ def filter(cat, sort='alfa'):
         cars = Car.query.all()
     else:
         cars = Car.query.filter_by(category=cat)
-
-    def stat_counter(car,to_count='opinions'):
-        all_orders = Order.query.all()
-        if to_count=='opinions':
-            counts = [1 if order.car_id==car.id else 0 for order in all_orders].count(1)
-        else:
-
-            counts = len([val for val in [order.opinion if order.car_id == car.id else None for order in all_orders] if val])
-        return counts
 
     if sort=='opinie':
         cars = [(car, stat_counter(car,'opinions')) for car in cars]
@@ -129,5 +149,29 @@ def account(option):
         return render_template('account.html',orders_cars=orders_cars)
 
 @app.route('/basket', methods=['POST', 'GET'])
-def basket():
-    return render_template('basket.html')
+@app.route('/basket/<option>/<int:car_id>', methods=['POST', 'GET'])
+def basket(option='show', car_id=0):
+    if option=='add':
+        in_basket = Basket.query.filter_by(user_id = current_user.id, car_id = car_id).first()
+        if in_basket:
+            flash('Wybrany samochód jest już w koszyku', 'danger')
+        else:
+            new_item = Basket(user_id = current_user.id, car_id = car_id)
+            db.session.add(new_item)
+            db.session.commit()
+            flash('Dodano do koszyka!', 'success')
+        return redirect(url_for('home'))
+    elif option=='remove':
+        to_remove = Basket.query.filter_by(user_id = current_user.id, car_id = car_id).one()
+        db.session.delete(to_remove)
+        db.session.commit()
+        flash('Usunięto pozycję z koszyka!', 'info')
+        return redirect(url_for('basket'))
+    else:
+        form = RentForm()
+        basket_items = Basket.query.filter_by(user_id  = current_user.id)
+        basket_cars_id = [item.car_id for item in basket_items]
+        basket_cars = [Car.query.filter_by(id = car_id).first() for car_id in basket_cars_id]
+        #basket_cars = db.engine.execute("SELECT * FROM car WHERE id IN (SELECT car_id FROM basket WHERE user_id= :val)", {'val':current_user.id})
+        cars_ops = zip(basket_cars, [stat_counter(car) for car in basket_cars])
+    return render_template('basket.html', cars_ops = cars_ops, form=form)
