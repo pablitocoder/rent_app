@@ -1,3 +1,50 @@
-<div>
+{% extends "base.html" %}
+{% block content %}
 
-</div>
+{% if not payment %}
+    <div class="text-center">
+    <h2>Wypożyczasz: {{ car.brand + " " + car.model }}</h2>
+    <h4>rok produkcji: <i>{{ car.prod_year }} </i></h4>
+    <h4>cena: <b>{{ car.price }} zł/doba </b></h4>
+    </div>
+    <hr>
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{form.car_id(type="hidden", value=car.id)}}
+                    <div style="float: left; width: 50%;">
+                    <label class="form-control-label">Wypożycz od:</label>
+                        {{ form.start_date(class="form-control", type="date") }}
+                    </div>
+                    <div style="float: right; width: 50%;">
+                    <label class="form-control-label">do:</label>
+                        {{ form.end_date(class="form-control", type="date") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Metoda Płatności</label>
+                        {{ form.payment(class="form-control", type="option") }}
+                </div>
+
+            </fieldset>
+            <div class="form-group" align="right">
+                {{ form.submit(class="btn btn-info") }}
+            </div>
+        </form>
+    </div>
+{% else %}
+    <div class="text-center">
+        <h2>Wypożyczono: {{ car.brand + " " + car.model }}</h2>
+        <h5>Kwota do zapłaty: <b>{{ to_pay }} zł</b> </h5>
+        <h5>Metoda płatności: {{ order.pay_option }}</h5>
+        <h5>Termin płatności: 7 dni</h5>
+        <h5> <a href="#">regulamin</a></h5>
+        <hr>
+        <a href="{{ (url_for('account', option='history' )) }}" role="button" class="btn btn-outline-info">Konto</a>
+        <a href="{{ (url_for('pay', order_id=order.order_id, stat='wpłata')) }}" role="button" class="btn btn-outline-info" >Zapłać</a>
+    </div>
+{% endif %}
+{% endblock content %}
+

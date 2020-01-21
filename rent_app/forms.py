@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask import flash
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from rent_app.models import User
 from flask_login import current_user
@@ -54,10 +54,13 @@ class RentForm(FlaskForm):
     car_id = IntegerField("")
     start_date = DateField('Data wypożyczenia: ', validators=[DataRequired()])
     end_date = DateField('Data zwrotu: ', validators=[DataRequired()])
+    payment = SelectField('Metoda płatności: ', choices=
+                                [('card','karta kredytowa'),('blik','BLIK'),('transfer','przelew'),('cash','płatność gotówką na miejscu')],
+                                validators=[DataRequired()])
     submit = SubmitField('Zatwierdź')
 
     def validate_start_date(self,start_date):
-        diff = datetime.datetime.utcnow().date() - start_date
+        diff = datetime.datetime.utcnow().date() - start_date.data
         if diff.days < 0:
             flash("Wybierz poprawne daty", 'danger')
             raise ValidationError("Wybierz poprawne daty")

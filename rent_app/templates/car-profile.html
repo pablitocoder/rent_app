@@ -31,38 +31,17 @@
 </div>
 
 <div align="right">
-    <a href= "#collapse_form" data-toggle="collapse" class="btn btn-outline-info" role = "button" aria-expanded="false" aria-controls="collapse_form" >Wypożycz</a>
-    <a href= "{{ (url_for('basket',option='add', car_id=car.id))}}" class="btn btn-outline-info" role = "button" >Dodaj do koszyka</a>
+        <a href= "{{ (url_for('rent', car_id=car.id)) }}"  class="btn btn-outline-info" role = "button" >Wypożycz</a>
+    <a href= "{{ (url_for('basket',option='add', car_id=car.id)) }}" class="btn btn-outline-info" role = "button" >Dodaj do koszyka</a>
 </div>
 
-
-<div class="collapse" id="collapse_form">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <div class="form-group">
-                {{form.car_id(type="hidden", value=car.id)}}
-                <div style="float: left; width: 50%;">
-                <label class="form-control-label">Wypożycz od:</label>
-                    {{ form.start_date(class="form-control", type="date") }}
-                </div>
-                <div style="float: right; width: 50%;">
-                <label class="form-control-label">do:</label>
-                    {{ form.end_date(class="form-control", type="date") }}
-                </div>
-            </div>
-        </fieldset>
-        <div class="form-group" align="right">
-            {{ form.submit(class="btn btn-info") }}
-        </div>
-    </form>
-</div>
 
 <div class= "" style="margin-top:10pt;">
 <legend class="border-bottom">Opinie</legend>
 {% for order, user in orders_users %}
-<div class="media content-section">
 {% if order.opinion %}
+<div class="media content-section">
+
     <div class="media-body">
         <div class="meta-data">
             <small>{{order.opinion_date.strftime("%d-%m-%Y %H:%M:%S")}}</small>
@@ -70,8 +49,9 @@
         <h6><p class="article-title">{{ user.username }}</p></h6>
         <p class="article-content">{{ order.opinion }}</p>
     </div>
-{% endif %}
 </div>
+{% endif %}
+
 {% endfor %}
 </div>
 </div>

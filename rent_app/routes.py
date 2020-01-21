@@ -73,22 +73,13 @@ def login():
 @app.route('/car_profile/<int:car_id>', methods=["POST", "GET"])
 @app.route('/car_profile', methods=["POST", "GET"])
 def car_profile(car_id=0):
-    form = RentForm()
-    if form.validate_on_submit():
-        car_id = form.car_id.data
-        order = Order(car_id = car_id, user_id = current_user.id, start_date = form.start_date.data, end_date=form.end_date.data)
-        db.session.add(order)
-        db.session.commit()
-        flash("pomyślnie wypożyczono auto",'success')
-        return redirect(url_for('account', option='history'))
-    else:
-        car = Car.query.filter_by(id=int(car_id)).first()
-        orders = Order.query.filter_by(car_id = car_id)
-        users_id = [order.user_id for order in orders]
-        users = [User.query.filter_by(id=u_id).first() for u_id in users_id]
-        orders_users = zip(orders,users)
-        car_aval = available(car.id, now=True)
-        return render_template('car-profile.html', car=car, car_aval = car_aval, orders_users=orders_users, form=form )
+    car = Car.query.filter_by(id=int(car_id)).first()
+    orders = Order.query.filter_by(car_id = car_id)
+    users_id = [order.user_id for order in orders]
+    users = [User.query.filter_by(id=u_id).first() for u_id in users_id]
+    orders_users = zip(orders,users)
+    car_aval = available(car.id, now=True)
+    return render_template('car-profile.html', car=car, car_aval = car_aval, orders_users=orders_users )
 
 @app.route('/filter/<cat>/')
 @app.route('/filter/<cat>/<sort>')
@@ -150,6 +141,7 @@ def account(option):
 
 @app.route('/basket', methods=['POST', 'GET'])
 @app.route('/basket/<option>/<int:car_id>', methods=['POST', 'GET'])
+@login_required
 def basket(option='show', car_id=0):
     if option=='add':
         in_basket = Basket.query.filter_by(user_id = current_user.id, car_id = car_id).first()
@@ -175,3 +167,41 @@ def basket(option='show', car_id=0):
         #basket_cars = db.engine.execute("SELECT * FROM car WHERE id IN (SELECT car_id FROM basket WHERE user_id= :val)", {'val':current_user.id})
         cars_ops = zip(basket_cars, [stat_counter(car) for car in basket_cars])
     return render_template('basket.html', cars_ops = cars_ops, form=form)
+
+
+@app.route('/rent/<int:car_id>', methods=['POST','GET'])
+@login_required
+def rent(car_id):
+    if not available(car_id, now=True):
+        flash("Wybrany samochód jest obecnie niedostępny")
+        return redirect(url_for('car_profile', car_id = car_id))
+    car = Car.query.filter_by(id=car_id).first()
+    form = RentForm()
+    if form.validate_on_submit():
+        car_id = form.car_id.data
+        order = Order(car_id = car_id, user_id = current_user.id,
+                      start_date = form.start_date.data, end_date=form.end_date.data ,
+                      pay_option=form.payment.data)
+        db.session.add(order)
+        db.session.commit()
+        flash("operacja przebiegła pomyślnie, hurra!",'success')
+        return redirect(url_for('pay', order_id=order.order_id))
+    return render_template('rent.html', payment=False, car=car, form=form)
+
+
+@app.route('/pay/<int:order_id>', methods=['POST','GET'])
+@app.route('/pay/<int:order_id>/<stat>', methods=['POST','GET'])
+def pay(order_id, stat=""):
+    if stat=="":
+        order = Order.query.filter_by(order_id=order_id).first()
+        car = Car.query.filter_by(id = order.car_id).first()
+        to_pay = (order.end_date - order.start_date).days * car.price
+        return render_template('rent.html', payment=True, order=order, to_pay=to_pay, car=car)
+    else:
+        order = Order.query.filter_by(order_id=order_id).first()
+        order.status = "Zapłacone"
+        db.session.commit()
+        flash("Wpłata została odnotowana!")
+        return redirect(url_for('account', option="history"))
+
+

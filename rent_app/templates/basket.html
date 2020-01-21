@@ -17,29 +17,11 @@
             rok produkcji: <i> {{ car.prod_year }} </i><br>
             cena: <i> {{ car.price }} zł/doba </i><br>
         </p>
-    <a href= "{{ (url_for('basket',option='remove', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Usuń z koszyka</a>
+    <a href= "{{ (url_for('basket',option='remove', car_id=car.id))}}" class="btn btn-outline-warning align-bottom" role = "button">Usuń z koszyka</a>
+    <a href= "{{ (url_for('rent', car_id=car.id))}}" class="btn btn-outline-info align-bottom" role = "button">Wypożycz</a>
     </div>
 </div>
-<div style="margin-top:15px;">
-    <form method="POST" action="{{url_for('car_profile', car_id=car.id)}}">
-        <fieldset class="form-group">
-            <div class="form-group">
-            <div style="float: left; width: 50%;">
-            <label class="form-control-label">Wypożycz od:</label>
-                {{ form.start_date(class="form-control", type="date") }}
-            <!--<input name="start_date" type="date" class="form-control" > -->
-            </div>
-            <div style="float: right; width: 50%;">
-            <label class="form-control-label">do:</label>
-            {{ form.end_date(class="form-control", type="date") }}
-            </div>
-        </fieldset>
-        <div class="form-group" align="right">
-            {{ form.submit(class="btn btn-info") }}
-        </div>
-    </form>
-</div>
-<hr>
+
 {% endfor %}
 </div>
 

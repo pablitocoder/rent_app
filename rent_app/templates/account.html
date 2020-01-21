@@ -27,11 +27,11 @@
             <p class="article-content">status: <i> {{ order.status }}</i><br>
                 data wypożyczenia: <i>{{ order.order_date }} </i><br>
                 terminy: <i> {{ order.start_date }} - {{order.end_date}}</i><br>
-                koszt: <i> {{ car.price * (order.end_date - order.start_date) }} zł</i><br>
+                koszt: <i> {{ (order.end_date - order.start_date).days * car.price }} zł</i><br>
             </p>
               <a href= "{{ (url_for('car_profile', car_id=car.id)) }}" class="btn btn-outline-info align-bottom" role = "button">Zobacz</a>
-            {% if order.status=="Nierozliczone" %}
-                <a href= "{{ (url_for('car_profile', car_id=car.id))}}" class="btn btn-info align-bottom" role = "button">Zapłać</a>
+            {% if order.status=="W trakcie" %}
+                <a href= "{{ (url_for('pay', order_id = order.order_id))}}" class="btn btn-info align-bottom" role = "button">Do płatności</a>
             {% endif %}
         </div>
 

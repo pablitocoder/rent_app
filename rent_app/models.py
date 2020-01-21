@@ -39,9 +39,12 @@ class Order(db.Model):
     end_date = db.Column(db.Date, default = date.today())
     opinion = db.Column(db.String(250))
     opinion_date = db.Column(db.DateTime)
-    status=db.Column(db.String(30), default="Nierozliczone")
+    pay_option = db.Column(db.String(30))
+    status=db.Column(db.String(30), default="W trakcie")
 
 class Basket(db.Model):
     item_id=db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     car_id = db.Column(db.Integer, db.ForeignKey('car.id'), nullable=False)
+    pay_option = db.Column(db.String(30))
+    status=db.Column(db.String(30), default="W trakcie")
