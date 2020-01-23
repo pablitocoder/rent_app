@@ -60,7 +60,7 @@ class RentForm(FlaskForm):
     submit = SubmitField('Zatwierdź')
 
     def validate_start_date(self,start_date):
-        diff = datetime.datetime.utcnow().date() - start_date.data
+        diff = start_date.data - datetime.datetime.utcnow().date()
         if diff.days < 0:
             flash("Wybierz poprawne daty", 'danger')
             raise ValidationError("Wybierz poprawne daty")

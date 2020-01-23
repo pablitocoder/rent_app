@@ -1,0 +1,20 @@
+{% extends "account.html" %}
+{% block account %}
+    {% if current_user.username == 'pablito11' %}
+    <div>
+    <legend class="border-bottom">Opinie</legend>
+    {% for order, user in orders_users %}
+        {% if order.opinion %}
+            <div class="media content-section">
+                <div class="media-body">
+                    <h4><p class="article-title">{{ user.username }}</p></h4>
+                    <p class="article-content">{{ order.opinion }}</p>
+                    <a href="{{ (url_for('approve_opinion', order_id=order.order_id)) }}" role="button" class="btn btn-info">Wrzucim ten koment</a>
+                </div>
+                </div>
+
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% endif %}
+{% endblock account %}

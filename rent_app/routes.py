@@ -1,20 +1,31 @@
 from flask import render_template, url_for, flash, redirect, request
-from rent_app import app, db, bcrypt
+from rent_app import app, db, bcrypt, mail
 from rent_app.forms import RegistrationForm, LoginForm, ChangePassword, RentForm
 from rent_app.models import Car, User, Order, Basket
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
+from flask_mail import Message
+
+def check_orders():
+    orders = Order.query.all()
+    for order in orders:
+        if order.end_date <= datetime.date.today():
+            order.status="Zrealizowane"
+    db.session.commit()
+
 
 @app.route('/')
 def home():
+    check_orders()
     return redirect(url_for('filter',cat= 'wszystkie'))
+
 
 def stat_counter(car,to_count='opinions'):
     all_orders = Order.query.all()
     if to_count=='opinions':
-        counts = [1 if order.car_id==car.id else 0 for order in all_orders].count(1)
+        counts = [1 if order.car_id == car.id and order.opinion else 0 for order in all_orders].count(1)
     else:
-        counts = len([val for val in [order.opinion if order.car_id == car.id else None for order in all_orders] if val])
+        counts = [1 if order.car_id==car.id else 0 for order in all_orders].count(1)
     return counts
 
 def print_date(dtime):
@@ -103,7 +114,6 @@ def filter(cat, sort='alfa'):
     else:
         cars = sorted(cars, key=lambda car: car.brand + " " + car.model)
         cars_ops = zip(cars, [stat_counter(car) for car in cars])
-
     return render_template('home.html', cars_ops = cars_ops, category=cat)
 
 @app.route('/logout')
@@ -128,10 +138,17 @@ def account(option):
         order_id = int(request.form['order_id'])
         order = Order.query.filter_by(order_id= order_id ).first()
         order.opinion = request.form['opinion_text'].strip()
-        order.opinion_date = datetime.datetime.utcnow()
         db.session.commit()
-        flash('Opinia została zaktualizowana!', 'success')
+        flash('Opinia czeka na akceptację moderatora', 'success')
         return redirect(url_for('account', option='history'))
+    elif option=="moderate":
+        # orders to approve
+        orders = Order.query.filter_by(opinion_date=None)
+        orders = [order for order in orders if order.opinion != None]
+        users_id = [order.user_id for order in orders]
+        users = [User.query.filter_by(id=user_id).first() for user_id in users_id]
+        orders_users = zip(orders, users)
+        return render_template('moderate.html', orders_users=orders_users)
     else:
         orders = Order.query.filter_by(user_id=current_user.id)
         cars_id = [order.car_id for order in orders]
@@ -201,7 +218,35 @@ def pay(order_id, stat=""):
         order = Order.query.filter_by(order_id=order_id).first()
         order.status = "Zapłacone"
         db.session.commit()
-        flash("Wpłata została odnotowana!")
+        flash("Wpłata została odnotowana!", 'success')
         return redirect(url_for('account', option="history"))
 
+
+@app.route('/approve_opinion/<int:order_id>')
+def approve_opinion(order_id):
+    order = Order.query.filter_by(order_id=order_id).first()
+    order.opinion_date = datetime.datetime.utcnow()
+    db.session.commit()
+    flash("Potwierdzono komentarz", 'success')
+    return redirect(url_for('account', option='moderate'))
+
+
+
+@app.route("/mail/<int:order_id>")
+def mailer(order_id):
+    order = Order.query.filter_by(order_id = order_id).first()
+    user = User.query.filter_by(id=order.user_id).first()
+    car = Car.query.filter_by(id = order.car_id).first()
+    text = f"""
+    Siemanko {user.username},
+    Właśnie wypożyczyłeś/aś {car.brand} {car.model}
+    Warunki płatności: {order.pay_option} 
+    Termin: 7 dni
+
+    Kłaniamy się serdecznie, rent_app
+    """
+    msg = Message(text ,
+                  sender="rent@rent_app.com",
+                  recipients=[user.email])
+    mail.send(msg)
 
